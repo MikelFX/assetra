@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASSETRA - Předprodej</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="bg-gray-900 text-white font-sans">
     <!-- Navigační lišta -->
@@ -17,6 +18,7 @@
                 <li><a href="o-projektu.html" class="hover:text-yellow-500">O projektu</a></li>
                 <li><a href="plan.html" class="hover:text-yellow-500">Plán</a></li>
                 <li><a href="tym.html" class="hover:text-yellow-500">Tým</a></li>
+                <li><a href="nemovitosti.html" class="hover:text-yellow-500">Nemovitosti</a></li>
             </ul>
         </div>
     </nav>
@@ -27,8 +29,14 @@
             <h2 class="text-4xl font-bold mb-8">Předprodej ASSETRA Tokenů</h2>
             <p class="text-lg mb-8">Staňte se součástí revoluce v investování do nemovitostí! Registrujte se do předprodeje a získejte tokeny ASSET s exkluzivními výhodami.</p>
             
+            <!-- Graf alokace tokenů -->
+            <div class="max-w-md mx-auto mb-12">
+                <h3 class="text-2xl font-semibold mb-4">Alokace tokenů</h3>
+                <canvas id="tokenChart" class="w-full"></canvas>
+            </div>
+
             <!-- Formulář s Formspree -->
-            <form id="predprodej-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="max-w-lg mx-auto bg-gray-800 p-8 rounded-lg" onsubmit="validateForm(event)">
+            <form id="predprodej-form" action="https://formspree.io/f/mjkwewvw" method="POST" class="max-w-lg mx-auto bg-gray-800 p-8 rounded-lg" onsubmit="validateForm(event)">
                 <div class="mb-4">
                     <label for="name" class="block text-left mb-2">Jméno</label>
                     <input type="text" id="name" name="name" class="w-full p-3 rounded bg-gray-700 text-white" placeholder="Zadejte své jméno" required>
@@ -57,8 +65,9 @@
         </div>
     </footer>
 
-    <!-- JavaScript pro validaci formuláře -->
+    <!-- JavaScript pro validaci formuláře a graf -->
     <script>
+        // Validace formuláře
         function validateForm(event) {
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
@@ -71,9 +80,30 @@
                 message.textContent = 'Prosím, vyplňte všechna pole správně (min. 100 tokenů).';
             } else {
                 message.classList.add('hidden');
-                // Formspree odešle data automaticky
             }
         }
+
+        // Graf alokace tokenů
+        const ctx = document.getElementById('tokenChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Nemovitosti', 'Rozvoj', 'Tým', 'Marketing', 'Rezerva'],
+                datasets: [{
+                    data: [50, 20, 15, 10, 5],
+                    backgroundColor: ['#FFD700', '#4B0082', '#00CED1', '#FF4500', '#228B22'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { color: '#FFFFFF' }
+                    }
+                }
+            }
+        });
     </script>
 </body>
 </html>
