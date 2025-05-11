@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASSETRA - Předprodej</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+    <!-- Navigační lišta -->
+    <nav class="bg-gray-800 py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <h1 class="text-2xl font-bold">ASSETRA</h1>
+            <ul class="flex space-x-6">
+                <li><a href="index.html" class="hover:text-yellow-500">Domů</a></li>
+                <li><a href="predprodej.html" class="hover:text-yellow-500">Předprodej</a></li>
+                <li><a href="o-projektu.html" class="hover:text-yellow-500">O projektu</a></li>
+                <li><a href="plan.html" class="hover:text-yellow-500">Plán</a></li>
+                <li><a href="tym.html" class="hover:text-yellow-500">Tým</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hlavní sekce předprodeje -->
+    <section class="py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold mb-8">Předprodej ASSETRA Tokenů</h2>
+            <p class="text-lg mb-8">Staňte se součástí revoluce v investování do nemovitostí! Registrujte se do předprodeje a získejte tokeny ASSET s exkluzivními výhodami.</p>
+            
+            <!-- Formulář s Formspree -->
+            <form id="predprodej-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="max-w-lg mx-auto bg-gray-800 p-8 rounded-lg" onsubmit="validateForm(event)">
+                <div class="mb-4">
+                    <label for="name" class="block text-left mb-2">Jméno</label>
+                    <input type="text" id="name" name="name" class="w-full p-3 rounded bg-gray-700 text-white" placeholder="Zadejte své jméno" required>
+                </div>
+                <div class="mb-4">
+                    <label for="email" class="block text-left mb-2">E-mail</label>
+                    <input type="email" id="email" name="email" class="w-full p-3 rounded bg-gray-700 text-white" placeholder="Zadejte svůj e-mail" required>
+                </div>
+                <div class="mb-4">
+                    <label for="tokens" class="block text-left mb-2">Počet tokenů (min. 100)</label>
+                    <input type="number" id="tokens" name="tokens" class="w-full p-3 rounded bg-gray-700 text-white" placeholder="Zadejte počet tokenů" min="100" required>
+                </div>
+                <button type="submit" class="w-full bg-yellow-500 text-gray-900 font-semibold py-3 rounded-lg hover:bg-yellow-400 transition">Odeslat registraci</button>
+                <p id="form-message" class="mt-4 text-red-500 hidden">Prosím, vyplňte všechna pole správně.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-900 text-center">
+        <p>© 2035 ASSETRA. Všechna práva vyhrazena.</p>
+        <div class="mt-4">
+            <a href="https://x.com/assetra" class="text-yellow-500 mx-2">X</a>
+            <a href="https://discord.gg/assetra" class="text-yellow-500 mx-2">Discord</a>
+            <a href="https://t.me/assetra" class="text-yellow-500 mx-2">Telegram</a>
+        </div>
+    </footer>
+
+    <!-- JavaScript pro validaci formuláře -->
+    <script>
+        function validateForm(event) {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const tokens = document.getElementById('tokens').value;
+            const message = document.getElementById('form-message');
+
+            if (name === '' || email === '' || tokens < 100) {
+                event.preventDefault();
+                message.classList.remove('hidden');
+                message.textContent = 'Prosím, vyplňte všechna pole správně (min. 100 tokenů).';
+            } else {
+                message.classList.add('hidden');
+                // Formspree odešle data automaticky
+            }
+        }
+    </script>
+</body>
+</html>
